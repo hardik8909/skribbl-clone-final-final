@@ -1,15 +1,11 @@
 package skribbl_backend.Controller;
 
-
-
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import skribbl_backend.Dto.GameState;
-
-;
-
 import skribbl_backend.Service.GameService;
 
 import java.util.List;
@@ -38,8 +34,12 @@ public class GameWebSocketController {
                 gameService;
     }
 
-    @MessageMapping("/game/start")
-    public void startGame() {
+    @MessageMapping("/game/{roomId}/start")
+    public void startGame(
+
+            @DestinationVariable
+            String roomId
+    ) {
 
         List<String> players =
                 List.of(
@@ -55,7 +55,7 @@ public class GameWebSocketController {
 
         messagingTemplate.convertAndSend(
 
-                "/topic/game",
+                "/topic/game/" + roomId,
 
                 state
         );
