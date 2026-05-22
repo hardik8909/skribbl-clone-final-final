@@ -1,0 +1,10 @@
+apple
+banana
+car
+house
+tiger
+computer
+phone
+football
+pizza
+guitar
