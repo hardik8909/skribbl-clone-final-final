@@ -6,8 +6,8 @@ COPY . .
 
 RUN chmod +x mvnw
 
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw clean install -DskipTests=true
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/*.jar"]
+ENTRYPOINT ["java","-jar","target/skribblbackend-0.0.1-SNAPSHOT.jar"]
