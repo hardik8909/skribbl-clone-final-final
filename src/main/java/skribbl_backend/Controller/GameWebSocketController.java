@@ -38,26 +38,26 @@ public class GameWebSocketController {
     public void startGame(
 
             @DestinationVariable
-            String roomId
+            String roomId,
+
+            GameState gameState
     ) {
 
-        List<String> players =
-                List.of(
-                        "Hardik",
-                        "Alex",
-                        "John"
-                );
-
-        GameState state =
-                gameService.startGame(
-                        players
-                );
+        System.out.println(
+                "GAME STATE RECEIVED FROM FRONTEND: "
+                        + gameState
+        );
 
         messagingTemplate.convertAndSend(
 
                 "/topic/game/" + roomId,
 
-                state
+                gameState
+        );
+
+        System.out.println(
+                "GAME STATE SENT TO ROOM: "
+                        + roomId
         );
     }
 }
